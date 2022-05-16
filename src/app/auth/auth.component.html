@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <alert-component 
+        [message]="error"
+        *ngIf="error"
+        (close)="onHandleError()"></alert-component>
+
+        <div *ngIf="isLoading"  style="text-align: center">
+            <app-spinner ></app-spinner>
+        </div>
+
+        <form 
+        [formGroup]="loginForm" 
+        (ngSubmit)="onSubmit() "
+        *ngIf="!isLoading">
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                type="email" 
+                id="email" 
+                class="form-control"
+                required
+                email
+                formControlName="email">
+            </div>
+            <p 
+            class="help-block"
+            *ngIf="this.loginForm.get('email').invalid && (this.loginForm.get('email').dirty || this.loginForm.get('email').touched)"
+            >Enter a valid Email address</p>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                type="password" 
+                id="password" 
+                class="form-control"
+                required
+                formControlName="password"
+                >
+            </div>
+            <p 
+            class="help-block" 
+            *ngIf="this.loginForm.get('password').invalid && (this.loginForm.get('password').dirty || this.loginForm.get('password').touched)"
+            >Enter a password with a minimum length of 6 characters</p>
+
+
+            <button 
+            class="btn btn-primary" 
+            type="submit"
+            [disabled]="!loginForm.valid"
+            >
+            {{isLoginMode? 'Login':'Sign Up'}}
+            </button> 
+        |
+            <button 
+            class="btn btn-primary" 
+            type='button'
+            (click)="switchMode()"
+           >
+            Switch to {{!isLoginMode? 'Login':'Sign Up'}}
+            </button>
+
+
+        </form>
+    </div>
+</div>

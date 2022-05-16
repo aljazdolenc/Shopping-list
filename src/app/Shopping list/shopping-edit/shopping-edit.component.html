@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form
+        [formGroup]="shoppingAddForm"
+        (ngSubmit)="submit()">
+            <div class="row">
+
+                <div class="col-sm-5 form-group">
+
+                    <label for="name">Name</label>
+                    <input
+                    id="name"
+                    name="name" 
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                    [(ngModel)]="inputName"
+                    > 
+
+                    <span 
+                    class="help-block"
+                    *ngIf="!shoppingAddForm.get('name').valid && shoppingAddForm.get('name').touched">
+                      Enter name!
+                    </span>
+
+                </div>
+
+                <div class="col-sm-2 form-group">
+
+                    <label for="amount">Amount</label>
+                    <input
+                    id="amount"
+                    type="number" 
+                    class="form-control"
+                    formControlName="amount"
+                    [(ngModel)]="inputAmount">
+
+                    <span 
+                    class="help-block"
+                    *ngIf="!shoppingAddForm.get('amount').valid && shoppingAddForm.get('amount').touched">
+                      Enter amount!
+                    </span>
+
+                </div>
+
+            </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button 
+                        [disabled]="!shoppingAddForm.valid"
+                        class="btn btn-success" 
+                        type="submit"
+                        >{{EditOrAdd}}</button>
+                        <button 
+                        class="btn btn-danger"
+                        type="button"
+                        *ngIf="!hideDelete"
+                        (click)="onDelete()">Delete</button>
+                        <button 
+                        class="btn btn-primary"
+                        type="button"
+                        (click)="onClear()">Clear</button> 
+                        <button 
+                        class="btn btn-primary"
+                        type="button"
+                        (click)="onCancel()">Cancel</button>   
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
